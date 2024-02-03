@@ -1,0 +1,3 @@
+[submodule "src/rosa"]
+    path = src/rosa
+    url = git@github.com:Jmendes42/ROSA.git
