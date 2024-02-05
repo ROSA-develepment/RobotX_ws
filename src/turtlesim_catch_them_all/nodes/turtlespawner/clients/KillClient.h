@@ -3,7 +3,7 @@
 #define ROS_KILLCLIENT_H
 
 #include <rosa/client/Client.h>
-#include ""
+
 #include "turtlesim/srv/kill.hpp"
 #include "rclcpp/rclcpp.hpp"
 
