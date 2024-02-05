@@ -5,8 +5,8 @@
 #include "client/CatchTurtleClient.h"
 #include "interfaces/msg/turtle_array.hpp"
 
-#include "include/Publisher.h"
-#include "include/Subscriber.h"
+#include "rosa/publisher/Publisher.h"
+#include "rosa/subscriber/Subscriber.h"
 
 #include "turtlesim/msg/pose.hpp"
 #include "geometry_msgs/msg/twist.hpp"

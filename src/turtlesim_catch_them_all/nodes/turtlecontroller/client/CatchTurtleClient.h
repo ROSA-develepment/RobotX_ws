@@ -4,7 +4,7 @@
 
 #include "interfaces/srv/catch_turtle.hpp"
 
-#include "include/Client.h"
+#include "rosa/client/Client.h"
 
 
 using Turtle = interfaces::msg::Turtle;

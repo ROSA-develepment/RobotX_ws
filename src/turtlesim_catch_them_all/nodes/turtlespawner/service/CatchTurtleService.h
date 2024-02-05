@@ -2,7 +2,7 @@
 #ifndef ROS_CATCHTURTLESERVICE_H
 #define ROS_CATCHTURTLESERVICE_H
 
-#include <include/Service.h>
+#include <rosa/service/Service.h>
 #include "rclcpp/rclcpp.hpp"
 #include "interfaces/srv/catch_turtle.hpp"
 #include "../clients/KillClient.h"
