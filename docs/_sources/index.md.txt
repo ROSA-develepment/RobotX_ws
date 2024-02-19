@@ -10,6 +10,7 @@ Welcome to ROSA's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+Something to add to documentation here
 
 
 Indices and tables
