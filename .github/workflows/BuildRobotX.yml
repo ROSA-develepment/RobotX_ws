@@ -1,4 +1,4 @@
-name: project_ROSA_build
+name: project_RobotX_build
 
 on:
   # Triggered whenever push to the main branch
@@ -45,15 +45,18 @@ jobs:
         sudo apt install ros-humble-desktop
         sudo apt install ros-dev-tools
 
-      #Worckspace now!!!
-
-      
+    - name: Setup workspace
+      run: |
+          source /opt/ros/humble/setup.bash
+          mkdir robotx_ws
+          cd robotx_ws
+      # We want to use GitHub CI checkout version 3 for checking out the branch
     - uses: actions/checkout@v3
-    - name: configure
-      run: ./configure
-    - name: make
-      run: make
-    - name: make check
-      run: make check
-    - name: make distcheck
-      run: make distcheck
+      with:
+          path: ros_ws/
+          
+    - name: Build project
+      run: |
+          colcon build
+          source install/setup.bash
+          
