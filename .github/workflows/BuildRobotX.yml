@@ -42,21 +42,21 @@ jobs:
       run: |
         sudo apt update
         sudo apt upgrade
-        sudo apt install ros-humble-desktop
-        sudo apt install ros-dev-tools
+        sudo apt install ros-humble-desktop -y
+        sudo apt install ros-dev-tools -y
 
     - name: Setup workspace
       run: |
           source /opt/ros/humble/setup.bash
-          mkdir robotx_ws
-          cd robotx_ws
+
       # We want to use GitHub CI checkout version 3 for checking out the branch
     - uses: actions/checkout@v3
       with:
-          path: ros_ws/
+          path: robotx_ws/
           
     - name: Build project
       run: |
+          cd robotx_ws/
           colcon build
           source install/setup.bash
           
