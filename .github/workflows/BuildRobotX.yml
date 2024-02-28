@@ -50,7 +50,7 @@ jobs:
           source /opt/ros/humble/setup.bash
 
       # We want to use GitHub CI checkout version 3 for checking out the branch
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
           path: robotx_ws/
           submodules: 'recursive'
