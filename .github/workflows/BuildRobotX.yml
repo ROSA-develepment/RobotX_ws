@@ -58,6 +58,6 @@ jobs:
     - name: Build project
       run: |
           cd robotx_ws/
-          colcon build
+          colcon build --packages-select interfaces
           source install/setup.bash
           
