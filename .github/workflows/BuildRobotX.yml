@@ -1,62 +1,41 @@
-name: project_RobotX_build
+
+name: ROS 2 CI Build
 
 on:
-  # Triggered whenever push to the main branch
   push:
-    branches: [ "main" ]
-
-  # Triggered whenever a pull request is created on main
+    branches:
+      - main
   pull_request:
-    branches: [ "main" ]
-    types: [ opened ]
+    branches:
+      - main
 
 jobs:
   build:
-    # Create a container on the last version of Ubuntu
-    runs-on: ros-humble
+    runs-on: ubuntu-latest
     steps:
-    
-    # - name: Make sure locale supports UTF-8
-    #   run: |
-    #     sudo apt update && sudo apt install locales
-    #     sudo locale-gen en_US en_US.UTF-8
-    #     sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
-    #     export LANG=en_US.UTF-8
 
-    # - name: Setup sources
-    #   run: |        
-    #     sudo apt install -y software-properties-common
-    #     sudo add-apt-repository universe
 
-    # - name: Add ROS2 GPG key
-    #   run: |
-    #     sudo apt update && sudo apt install curl -y
-    #     sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
+    - name: Set up ROS 2 environment
+      uses: ros-tooling/setup-ros@v0.7
+      with:
+        required-ros-distributions: humble
 
-    # - name: Add repository to sources list
-    #   run: |
-    #     echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
-
-    # - name: Install ROS2 packages
-    #   run: |
-    #     sudo apt update
-    #     sudo apt upgrade
-    #     sudo apt install ros-humble-desktop -y
-    #     sudo apt install ros-dev-tools -y
-
-    - name: Setup workspace
+    - name: Import workspace and install dependencies
       run: |
-          source /opt/ros/humble/setup.bash
+        sudo apt update && sudo apt install -y python3-vcstool python3-rosdep
+        mkdir ~/robotx_ws
+        sudo rosdep init
+        rosdep update
+        # rosdep install --from-paths ~/ros2_ws/src --ignore-src --rosdistro humble -y
 
-      # We want to use GitHub CI checkout version 3 for checking out the branch
+    - name: Check out repository
     - uses: actions/checkout@v4
       with:
           path: robotx_ws/
           submodules: 'recursive'
-          
-    - name: Build project
+
+    - name: Build workspace
       run: |
-          cd robotx_ws/
-          colcon build --packages-select interfaces
-          source install/setup.bash
-          
+        source /opt/ros/humble/setup.bash
+        cd ~/robotx_ws
+        colcon build
