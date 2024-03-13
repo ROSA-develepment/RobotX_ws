@@ -7,11 +7,10 @@ endif()
 
 find_package(ament_cmake REQUIRED)
 find_package(interfaces REQUIRED)
-find_package(rclcpp REQUIRED)
 find_package(rosa REQUIRED)
 
 add_executable(${PROJECT_NAME} src/ClosedMessageLoopNode.cpp)
-ament_target_dependencies(${PROJECT_NAME} interfaces rclcpp rosa)
+ament_target_dependencies(${PROJECT_NAME} interfaces rosa)
 
 install(TARGETS ${PROJECT_NAME}
         DESTINATION lib/${PROJECT_NAME}

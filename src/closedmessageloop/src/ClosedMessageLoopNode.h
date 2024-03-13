@@ -3,14 +3,14 @@
 #define ROS_CLOSEDMESSAGELOOPNODE_H
 
 #include "interfaces/msg/some_message.hpp"
+
+#include "rosa/node/Node.h"
 #include "rosa/publisher/Publisher.h"
 #include "rosa/subscriber/Subscriber.h"
 #include "rosa/timer/Timer.h"
 
-#include "rclcpp/rclcpp.hpp"
 
-
-class ClosedMessageLoopNode : public rclcpp::Node
+class ClosedMessageLoopNode : public Node
 {
 public:
     ClosedMessageLoopNode(std::string name);
