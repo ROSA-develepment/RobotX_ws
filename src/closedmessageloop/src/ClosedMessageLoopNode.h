@@ -13,9 +13,9 @@
 class ClosedMessageLoopNode : public Node
 {
 public:
-    ClosedMessageLoopNode(std::string name);
+    ClosedMessageLoopNode(std::string const& name);
 
-    void sendMessage(const std::string& message);
+    void sendMessage();
 
 private:
     void messageCallback(interfaces::msg::SomeMessage::SharedPtr const& message);

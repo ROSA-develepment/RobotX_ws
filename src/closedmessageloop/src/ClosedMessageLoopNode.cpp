@@ -2,7 +2,7 @@
 #include "ClosedMessageLoopNode.h"
 
 
-ClosedMessageLoopNode::ClosedMessageLoopNode(std::string name)
+ClosedMessageLoopNode::ClosedMessageLoopNode(std::string const& name)
     : Node(name)
     , _someTopic("someTopic")
     , _someMessagePublisher(this, _someTopic)
@@ -11,13 +11,13 @@ ClosedMessageLoopNode::ClosedMessageLoopNode(std::string name)
     , _someMessageReference(0)
 {
     _someMessageSubscriber.subscribe(_someTopic, [this](auto const& message) { messageCallback(message);});
-    _someTimer.createWallTimer(this, std::chrono::milliseconds(500), &ClosedMessageLoopNode::sendMessage, _someMessage);
+    _someTimer.createWallTimer(this, std::chrono::milliseconds(500), &ClosedMessageLoopNode::sendMessage);
 }
 
-void ClosedMessageLoopNode::sendMessage(std::string const& message)
+void ClosedMessageLoopNode::sendMessage()
 {
     auto someMessage = interfaces::msg::SomeMessage();
-    someMessage.message = message;
+    someMessage.message = _someMessage;
     someMessage.reference = _someMessageReference;
 
     _someMessagePublisher.send(someMessage);
