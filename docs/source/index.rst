@@ -10,15 +10,12 @@ Welcome to ROSA's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-Something to add to documentation here
-
-
 Indices and tables
 ==================
 
 
 * :ref:`Periface`
-* :ref:`Subscriber`
+* :ref:`Publisher`
 * :ref:`modindex`
 * :ref:`search`
 
@@ -27,38 +24,38 @@ Periface
 --------
 Since the objective is just to create a layer for more reusable and easyer to write code, all the main ROS features will have the same name.
 In this page you'll find a guide to use it.
+All examples can be found under RobotX/src/examples/
 
+Publisher
+---------
+This is the example for a simple Publisher.
+For this simple example, the Publisher will only publish a message, **SomeNumber**, on *number_topic*
 
-Subscriber
-----------
-
-You can find the reference code under RobotX/src/closedmessageloop
-
-This is a simple form of the subscriber. As you may know, a subscriber listens to messages on a subscribed topic
-
-You need to declare it as a template with the type of the message to which it will listen to
-
-
-
-
+It is declared like this:
 
 .. code-block:: cpp
-    
-	class ClosedMessageLoopNode : public Node
+
+	class NumberPublisherNode : public Node
 	{
 	public:
-    	ClosedMessageLoopNode(std::string const& name);
 
-    	void sendMessage();
+	    NumberPublisherNode(std::string const& name);
 
 	private:
-    	void messageCallback(interfaces::msg::SomeMessage::SharedPtr const& message);
 
-    	Subscriber<interfaces::msg::SomeMessage> _someMessageSubscriber;
+ 	    Publisher<SomeNumber> _publisher;
+	}
 
-    	std::string _someMessage;
-    	int _someMessageReference;
-	};
+It must have the name of the message it will use.
+And to initialize:
 
+.. code-block:: cpp
 
-This way you can 
+	NumberPublisherNode::NumberPublisherNode(std::string const &name)
+	    : Node(name)
+	    , _publisher(this, "number_topic")
+	{
+
+	}
+
+The parent node pointer is necessary to initialize the publisher, and the name of the topic on which to publish
