@@ -6,15 +6,15 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'ROSA'
-copyright = '2024, jmendes'
-author = 'jmendes'
+project = 'Robotic Operative System Abstraction'
+copyright = '2024, Jmendes'
+author = 'Jmendes'
 release = 'v0.0.0'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = ["myst_parser"]
+extensions = []
 
 templates_path = ['_templates']
 exclude_patterns = []
@@ -26,9 +26,3 @@ exclude_patterns = []
 
 html_theme = 'alabaster'
 html_static_path = ['_static']
-
-source_suffix = {
-    '.rst': 'restructuredtext',
-    '.txt': 'markdown',
-    '.md': 'markdown',
-}
