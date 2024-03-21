@@ -13,6 +13,9 @@ find_package(rosa REQUIRED)
 add_executable(number_publisher src/numberpublisher/NumberPublisherNode.cpp)
 ament_target_dependencies(number_publisher interfaces rosa)
 
+add_executable(number_subscriber src/numbersubscriber/NumberSubscriberNode.cpp)
+ament_target_dependencies(number_subscriber interfaces rosa)
+
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
   # the following line skips the linter which checks for copyrights
@@ -25,8 +28,10 @@ if(BUILD_TESTING)
   ament_lint_auto_find_test_dependencies()
 endif()
 
-install(TARGETS number_publisher
-        DESTINATION lib/${PROJECT_NAME}
+install(
+        TARGETS number_publisher
+                number_subscriber
+        DESTINATION lib/${PROJECT_NAME}/
 )
 
 ament_package()
