@@ -1,4 +1,5 @@
 
-SomeMessage message
+int64 first
+int64 second
 ---
-string answer
+int64 answer
