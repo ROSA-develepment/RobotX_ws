@@ -19,6 +19,9 @@ ament_target_dependencies(number_subscriber interfaces rosa)
 add_executable(add_two_numbers_client src/addtwonumbersclient/AddTwoNumbersClientNode.cpp src/addtwonumbersclient/client/AddTwoNumbersClient.cpp)
 ament_target_dependencies(add_two_numbers_client interfaces rosa)
 
+add_executable(add_two_numbers_server src/addtwonumbersserver/AddTwoNumbersServiceNode.cpp src/addtwonumbersserver/service/AddTwoNumbersService.cpp)
+ament_target_dependencies(add_two_numbers_server interfaces rosa)
+
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
   # the following line skips the linter which checks for copyrights
@@ -35,6 +38,7 @@ install(
         TARGETS number_publisher
                 number_subscriber
                 add_two_numbers_client
+                add_two_numbers_server
         DESTINATION lib/${PROJECT_NAME}/
 )
 

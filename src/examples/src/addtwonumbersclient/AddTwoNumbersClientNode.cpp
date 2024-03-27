@@ -9,13 +9,13 @@ AddTwoNumbersClientNode::AddTwoNumbersClientNode(std::string const &name)
     _client.setRequest(21, 21);
     _client.startWorkerThread();
 
-    RCLCPP_INFO(getLogger(), "Add Two Numbers Client Node node is running");
+    RCLCPP_INFO(getLogger(), "Add Two Numbers Client Node is running");
 }
 
 int main(int argc, char** argv)
 {
     rclcpp::init(argc, argv);
-    auto node = std::make_shared<AddTwoNumbersClientNode>("add_tow_numbers_client");
+    auto node = std::make_shared<AddTwoNumbersClientNode>("add_two_numbers_client");
     rclcpp::spin(node);
     rclcpp::shutdown();
     return 0;
