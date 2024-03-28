@@ -10,16 +10,16 @@ find_package(ament_cmake REQUIRED)
 find_package(interfaces REQUIRED)
 find_package(rosa REQUIRED)
 
-add_executable(number_publisher src/numberpublisher/NumberPublisherNode.cpp)
+add_executable(number_publisher numberpublisher/NumberPublisherNode.cpp)
 ament_target_dependencies(number_publisher interfaces rosa)
 
-add_executable(number_subscriber src/numbersubscriber/NumberSubscriberNode.cpp)
+add_executable(number_subscriber numbersubscriber/NumberSubscriberNode.cpp)
 ament_target_dependencies(number_subscriber interfaces rosa)
 
-add_executable(add_two_numbers_client src/addtwonumbersclient/AddTwoNumbersClientNode.cpp src/addtwonumbersclient/client/AddTwoNumbersClient.cpp)
+add_executable(add_two_numbers_client addtwonumbersclient/AddTwoNumbersClientNode.cpp addtwonumbersclient/client/AddTwoNumbersClient.cpp)
 ament_target_dependencies(add_two_numbers_client interfaces rosa)
 
-add_executable(add_two_numbers_server src/addtwonumbersserver/AddTwoNumbersServiceNode.cpp src/addtwonumbersserver/service/AddTwoNumbersService.cpp)
+add_executable(add_two_numbers_server addtwonumbersserver/AddTwoNumbersServiceNode.cpp addtwonumbersserver/service/AddTwoNumbersService.cpp)
 ament_target_dependencies(add_two_numbers_server interfaces rosa)
 
 if(BUILD_TESTING)
