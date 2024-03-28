@@ -30,7 +30,6 @@ jobs:
     - name: ROS CI Build
       uses: ros-tooling/action-ros-ci@v0.3
       with:
-        # package-name: "rosa"
         target-ros2-distro: "humble"
         skip-tests: true
 
@@ -45,8 +44,6 @@ jobs:
     - name: Check out repository
       uses: actions/checkout@v4
       with:
-        # path: robotx_ws/
-        
         submodules: 'recursive'
 
     - name: Build workspace
