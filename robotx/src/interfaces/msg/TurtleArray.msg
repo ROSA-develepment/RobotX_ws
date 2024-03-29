@@ -1,2 +1,0 @@
-
-Turtle[] turtles_array

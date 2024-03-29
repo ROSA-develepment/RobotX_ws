@@ -53,7 +53,7 @@ All <a class="reference external" href="https://github.com/ROSA-develepment/Robo
 </section>
 <section id="publisher">
 <span id="id1"></span><h2>Publisher<a class="headerlink" href="#publisher" title="Link to this heading">¶</a></h2>
-<p>In this <a class="reference external" href="https://github.com/ROSA-develepment/RobotX/tree/main/src/examples/src/numberpublisher">example1</a> for a simple Publisher, the Publisher will only publish a message, <strong>SomeNumber</strong>, on <em>number_topic</em></p>
+<p>In this <a class="reference external" href="https://github.com/ROSA-develepment/RobotX_ws/tree/main/robotx/src/examples/numberpublisher">example1</a> for a simple Publisher, the Publisher will only publish a message, <strong>SomeNumber</strong>, on <em>number_topic</em></p>
 <p>It’s declared like this:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">NumberPublisherNode</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Node</span>
 <span class="p">{</span>
@@ -80,7 +80,7 @@ And to initialize:</p>
 </section>
 <section id="subscriber">
 <span id="id2"></span><h2>Subscriber<a class="headerlink" href="#subscriber" title="Link to this heading">¶</a></h2>
-<p>In this <a class="reference external" href="https://github.com/ROSA-develepment/RobotX/tree/main/src/examples/src/numbersubscriber">example2</a> for a simple Subscriber, the Subscriber will only subscribe to <em>number_topic</em> listening to messages type <strong>SomeNumber</strong>, and logging the received messages.</p>
+<p>In this <a class="reference external" href="https://github.com/ROSA-develepment/RobotX_ws/tree/main/robotx/src/examples/numbersubscriber">example2</a> for a simple Subscriber, the Subscriber will only subscribe to <em>number_topic</em> listening to messages type <strong>SomeNumber</strong>, and logging the received messages.</p>
 <p>It’s declared like this:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="nl">NumberSubscriberNode</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Node</span>
 <span class="p">{</span>
@@ -113,7 +113,7 @@ And to initialize:</p>
 <section id="service">
 <span id="id3"></span><h2>Service<a class="headerlink" href="#service" title="Link to this heading">¶</a></h2>
 <p>Service is an abstract class, it is suposed to be derived to adapt to it’s porpuse.
-Like in the <a class="reference external" href="https://github.com/ROSA-develepment/RobotX/tree/main/src/examples/src/addtwonumbersserver">example4</a> a simple service is created like so:</p>
+Like in the <a class="reference external" href="https://github.com/ROSA-develepment/RobotX_ws/tree/main/robotx/src/examples/addtwonumbersservice">example3</a> a simple service is created like so:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">SomeService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">interfaces</span><span class="o">::</span><span class="n">srv</span><span class="o">::</span><span class="n">SomeService</span><span class="p">;</span>
 
 <span class="k">class</span><span class="w"> </span><span class="nc">AddTwoNumbersService</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Service</span><span class="o">&lt;</span><span class="n">SomeService</span><span class="o">&gt;</span>
@@ -166,7 +166,7 @@ Like in the <a class="reference external" href="https://github.com/ROSA-develepm
 <section id="client">
 <span id="id4"></span><h2>Client<a class="headerlink" href="#client" title="Link to this heading">¶</a></h2>
 <p>Client is an abstract class, it’s porpuse is to be derived to adapt to it’s porpuse.
-A request can be sent to a service like in <a class="reference external" href="https://github.com/ROSA-develepment/RobotX/tree/main/src/examples/src/addtwonumbersclient">example3</a> for a simple Client, the request is sent to <em>add_two_numbers</em> service:</p>
+A request can be sent to a service like in <a class="reference external" href="https://github.com/ROSA-develepment/RobotX_ws/tree/main/robotx/src/examples/addtwonumbersclient">example4</a> for a simple Client, the request is sent to <em>add_two_numbers</em> service:</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">SomeService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">interfaces</span><span class="o">::</span><span class="n">srv</span><span class="o">::</span><span class="n">SomeService</span><span class="p">;</span>
 
 <span class="k">class</span><span class="w"> </span><span class="nc">AddTwoNumbersClient</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Client</span><span class="o">&lt;</span><span class="n">SomeService</span><span class="o">&gt;</span>

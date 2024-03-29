@@ -11,12 +11,7 @@ find_package(rosidl_default_generators REQUIRED)
 
 rosidl_generate_interfaces(${PROJECT_NAME}
         "msg/SomeNumber.msg"
-        "msg/SomeMessage.msg"
         "srv/SomeService.srv"
-#        "action/CountUntil.action"
-#        "msg/Turtle.msg"
-#        "msg/TurtleArray.msg"
-#        "srv/CatchTurtle.srv"
 )
 
 ament_export_dependencies(rosidl_default_runtime)
@@ -24,7 +19,6 @@ ament_export_dependencies(rosidl_default_runtime)
 install(DIRECTORY
         ${CMAKE_CURRENT_SOURCE_DIR}/msg
         ${CMAKE_CURRENT_SOURCE_DIR}/srv
-        ${CMAKE_CURRENT_SOURCE_DIR}/action
         DESTINATION share/${PROJECT_NAME}/
 )
 

@@ -4,10 +4,10 @@
     contain the root `toctree` directive.
 
 .. _examples: https://github.com/ROSA-develepment/RobotX/tree/main/src/examples/src
-.. _example1: https://github.com/ROSA-develepment/RobotX/tree/main/src/examples/src/numberpublisher
-.. _example2: https://github.com/ROSA-develepment/RobotX/tree/main/src/examples/src/numbersubscriber
-.. _example3: https://github.com/ROSA-develepment/RobotX/tree/main/src/examples/src/addtwonumbersclient
-.. _example4: https://github.com/ROSA-develepment/RobotX/tree/main/src/examples/src/addtwonumbersserver
+.. _example1: https://github.com/ROSA-develepment/RobotX_ws/tree/main/robotx/src/examples/numberpublisher
+.. _example2: https://github.com/ROSA-develepment/RobotX_ws/tree/main/robotx/src/examples/numbersubscriber
+.. _example3: https://github.com/ROSA-develepment/RobotX_ws/tree/main/robotx/src/examples/addtwonumbersservice
+.. _example4: https://github.com/ROSA-develepment/RobotX_ws/tree/main/robotx/src/examples/addtwonumbersclient
 
 Welcome to ROSA's documentation!
 ================================
@@ -118,7 +118,7 @@ To initialize and subscribe to a topic:
 Service
 -------
 Service is an abstract class, it is suposed to be derived to adapt to it's porpuse.
-Like in the `example4`_ a simple service is created like so:
+Like in the `example3`_ a simple service is created like so:
 
 .. code-block:: cpp
 
@@ -180,7 +180,7 @@ After it can be declared and initialized on a node:
 Client
 ------
 Client is an abstract class, it's porpuse is to be derived to adapt to it's porpuse.
-A request can be sent to a service like in `example3`_ for a simple Client, the request is sent to *add_two_numbers* service:
+A request can be sent to a service like in `example4`_ for a simple Client, the request is sent to *add_two_numbers* service:
 
 .. code-block:: cpp
 
