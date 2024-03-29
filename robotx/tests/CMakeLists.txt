@@ -7,27 +7,24 @@ endif()
 
 find_package(ament_cmake REQUIRED)
 find_package(rosa REQUIRED)
-find_package(rclcpp REQUIRED)
 
 if(BUILD_TESTING)
-  find_package(ament_lint_auto REQUIRED)
-  ament_lint_auto_find_test_dependencies()
-
-  set(ament_cmake_cpplint_FOUND TRUE)
-  ament_lint_auto_find_test_dependencies()
-
   find_package(ament_cmake_gtest REQUIRED)
+
+  set(TESTFILES
+      main.cpp
+      src/PublisherTest.cpp)
+
+  ament_add_gtest(${PROJECT_NAME} ${TESTFILES})
+
+  ament_target_dependencies(${PROJECT_NAME} rosa)
+#  target_link_libraries(${PROJECT_NAME} rosa)
+
+  install(TARGETS
+            ${PROJECT_NAME}
+            DESTINATION lib/${PROJECT_NAME}/
+  )
+
 endif()
 
-ament_add_gtest(publisher_test src/PublisherTest.cpp)
-ament_target_dependencies(publisher_test
-        rosa
-        rclcpp
-)
-
-target_include_directories(publisher_test PUBLIC
-        ${rosa_INCLUDE_DIRS}
-)
-
 ament_package()
-#target_link_libraries(publisher_test rosa)
