@@ -6,19 +6,25 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
 endif()
 
 find_package(ament_cmake REQUIRED)
+find_package(rosa REQUIRED)
 
 if(BUILD_TESTING)
-  find_package(ament_lint_auto REQUIRED)
-  find_package(rosa REQUIRED)
+  find_package(ament_cmake_gtest REQUIRED)
 
-  ament_add_gtest(publisher_tests src/PublisherTest.cpp)
+  set(TESTFILES
+      main.cpp
+      src/PublisherTest.cpp)
 
-  target_include_directories(publisher_tests PUBLIC ${PROJECT_NAME})
-  target_link_libraries(publisher_tests rosa/include)
+  ament_add_gtest(${PROJECT_NAME} ${TESTFILES})
 
-  ament_target_dependencies(publisher_tests rosa)
+  ament_target_dependencies(${PROJECT_NAME} rosa)
+#  target_link_libraries(${PROJECT_NAME} rosa)
 
-  ament_lint_auto_find_test_dependencies()
+  install(TARGETS
+            ${PROJECT_NAME}
+            DESTINATION lib/${PROJECT_NAME}/
+  )
+
 endif()
 
 ament_package()

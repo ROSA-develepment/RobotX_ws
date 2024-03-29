@@ -1,11 +1,10 @@
 
-#include "PublisherTest.h"
 #include "rosa/publisher/Publisher.h"
 
 #include "gtest/gtest.h"
 
 
-TEST(PublisherTest, publishmessage)
+TEST(PublisherTestSuit, publishmessage)
 {
     ASSERT_EQ(1, 1);
 }

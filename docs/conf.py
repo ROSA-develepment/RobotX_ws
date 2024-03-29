@@ -6,7 +6,7 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'Robotic Operative System Abstraction'
+project = 'ROSA'
 copyright = '2024, Jmendes'
 author = 'Jmendes'
 release = 'v0.0.0'
@@ -17,7 +17,7 @@ release = 'v0.0.0'
 extensions = []
 
 templates_path = ['_templates']
-exclude_patterns = []
+exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
 
 

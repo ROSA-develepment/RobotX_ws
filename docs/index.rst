@@ -1,7 +1,7 @@
 .. ROSA documentation master file, created by
-   sphinx-quickstart on Mon Feb 19 18:31:26 2024.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+sphinx-quickstart on Mon Feb 19 18:31:26 2024.
+You can adapt this file completely to your liking, but it should at least
+contain the root `toctree` directive.
 
 .. _examples: https://github.com/ROSA-develepment/RobotX/tree/main/src/examples/src
 .. _example1: https://github.com/ROSA-develepment/RobotX/tree/main/src/examples/src/numberpublisher
@@ -50,7 +50,7 @@ It's declared like this:
 	class NumberPublisherNode : public Node
 	{
 	public:
-    
+
 	    NumberPublisherNode(std::string const& name);
 
 	private:
@@ -62,16 +62,16 @@ It must have the name of the message it will use.
 And to initialize:
 
 .. code-block:: cpp
-	
+
 	NumberPublisherNode::NumberPublisherNode(std::string const &name)
 	    : Node(name)
 	    , _publisher(this, "number_topic")
 	{
-    
-	}
-    
 
-    
+	}
+
+
+
 The parent node pointer is necessary to initialize the publisher, and the name of the topic on which to publish
 
 .. _subscriber:
@@ -119,7 +119,7 @@ To initialize and subscribe to a topic:
 Client
 ------
 
-In this `example3`_ for a simple Client, the *number_topic* **SomeNumber**, 
+In this `example3`_ for a simple Client, the *number_topic* **SomeNumber**,
 
 
 
