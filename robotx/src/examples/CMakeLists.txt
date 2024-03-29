@@ -19,7 +19,7 @@ ament_target_dependencies(number_subscriber interfaces rosa)
 add_executable(add_two_numbers_client addtwonumbersclient/AddTwoNumbersClientNode.cpp addtwonumbersclient/client/AddTwoNumbersClient.cpp)
 ament_target_dependencies(add_two_numbers_client interfaces rosa)
 
-add_executable(add_two_numbers_server addtwonumbersserver/AddTwoNumbersServiceNode.cpp addtwonumbersserver/service/AddTwoNumbersService.cpp)
+add_executable(add_two_numbers_server addtwonumbersservice/AddTwoNumbersServiceNode.cpp addtwonumbersservice/service/AddTwoNumbersService.cpp)
 ament_target_dependencies(add_two_numbers_server interfaces rosa)
 
 install(

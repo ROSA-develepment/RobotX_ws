@@ -30,10 +30,7 @@
 
           <div class="body" role="main">
             
-  <p>sphinx-quickstart on Mon Feb 19 18:31:26 2024.
-You can adapt this file completely to your liking, but it should at least
-contain the root <cite>toctree</cite> directive.</p>
-<section id="welcome-to-rosa-s-documentation">
+  <section id="welcome-to-rosa-s-documentation">
 <h1>Welcome to ROSA’s documentation!<a class="headerlink" href="#welcome-to-rosa-s-documentation" title="Link to this heading">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
@@ -43,8 +40,8 @@ contain the root <cite>toctree</cite> directive.</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#publisher"><span class="std std-ref">Publisher</span></a></p></li>
 <li><p><a class="reference internal" href="#subscriber"><span class="std std-ref">Subscriber</span></a></p></li>
-<li><p><a class="reference internal" href="#client"><span class="std std-ref">Client</span></a></p></li>
 <li><p><a class="reference internal" href="#service"><span class="std std-ref">Service</span></a></p></li>
+<li><p><a class="reference internal" href="#client"><span class="std std-ref">Client</span></a></p></li>
 <li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
 <li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
 </ul>
@@ -65,7 +62,6 @@ All <a class="reference external" href="https://github.com/ROSA-develepment/Robo
 <span class="w">    </span><span class="n">NumberPublisherNode</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="n">name</span><span class="p">);</span>
 
 <span class="k">private</span><span class="o">:</span>
-
 <span class="w">    </span><span class="n">Publisher</span><span class="o">&lt;</span><span class="n">SomeNumber</span><span class="o">&gt;</span><span class="w"> </span><span class="n">_publisher</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
@@ -114,13 +110,129 @@ And to initialize:</p>
 </pre></div>
 </div>
 </section>
-<section id="client">
-<span id="id3"></span><h2>Client<a class="headerlink" href="#client" title="Link to this heading">¶</a></h2>
-<p>In this <a class="reference external" href="https://github.com/ROSA-develepment/RobotX/tree/main/src/examples/src/addtwonumbersclient">example3</a> for a simple Client, the <em>number_topic</em> <strong>SomeNumber</strong>,</p>
-</section>
 <section id="service">
-<span id="id4"></span><h2>Service<a class="headerlink" href="#service" title="Link to this heading">¶</a></h2>
-<p><a class="reference external" href="https://github.com/ROSA-develepment/RobotX/tree/main/src/examples/src/addtwonumbersserver">example4</a></p>
+<span id="id3"></span><h2>Service<a class="headerlink" href="#service" title="Link to this heading">¶</a></h2>
+<p>Service is an abstract class, it is suposed to be derived to adapt to it’s porpuse.
+Like in the <a class="reference external" href="https://github.com/ROSA-develepment/RobotX/tree/main/src/examples/src/addtwonumbersserver">example4</a> a simple service is created like so:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">SomeService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">interfaces</span><span class="o">::</span><span class="n">srv</span><span class="o">::</span><span class="n">SomeService</span><span class="p">;</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">AddTwoNumbersService</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Service</span><span class="o">&lt;</span><span class="n">SomeService</span><span class="o">&gt;</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">        </span><span class="n">AddTwoNumbersService</span><span class="p">(</span><span class="n">Node</span><span class="o">*</span><span class="w"> </span><span class="n">parent</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="n">service</span><span class="p">);</span>
+
+<span class="k">private</span><span class="o">:</span>
+<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="n">processRequest</span><span class="p">(</span><span class="n">SomeService</span><span class="o">::</span><span class="n">Request</span><span class="o">::</span><span class="n">SharedPtr</span><span class="w"> </span><span class="n">request</span><span class="p">,</span>
+<span class="w">                        </span><span class="n">SomeService</span><span class="o">::</span><span class="n">Response</span><span class="o">::</span><span class="n">SharedPtr</span><span class="w"> </span><span class="n">response</span><span class="p">)</span><span class="w"> </span><span class="k">override</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>.cpp:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">AddTwoNumbersService</span><span class="o">::</span><span class="n">AddTwoNumbersService</span><span class="p">(</span><span class="n">Node</span><span class="w"> </span><span class="o">*</span><span class="n">parent</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="n">service</span><span class="p">)</span>
+<span class="w">        </span><span class="o">:</span><span class="w"> </span><span class="n">Service</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span><span class="w"> </span><span class="n">service</span><span class="p">)</span>
+<span class="p">{</span>
+
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="n">AddTwoNumbersService</span><span class="o">::</span><span class="n">processRequest</span><span class="p">(</span><span class="n">SomeService</span><span class="o">::</span><span class="n">Request</span><span class="o">::</span><span class="n">SharedPtr</span><span class="w"> </span><span class="n">request</span><span class="p">,</span>
+<span class="w">                                 </span><span class="n">SomeService</span><span class="o">::</span><span class="n">Response</span><span class="o">::</span><span class="n">SharedPtr</span><span class="w"> </span><span class="n">response</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">        </span><span class="n">response</span><span class="o">-&gt;</span><span class="n">answer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">request</span><span class="o">-&gt;</span><span class="n">first</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">request</span><span class="o">-&gt;</span><span class="n">second</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>After it can be declared and initialized on a node:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">AddTwoNumbersServiceNode</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Node</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">        </span><span class="n">AddTwoNumbersServiceNode</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="n">name</span><span class="p">);</span>
+
+<span class="k">private</span><span class="o">:</span>
+
+<span class="w">        </span><span class="n">AddTwoNumbersService</span><span class="w"> </span><span class="n">_server</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>.cpp</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">AddTwoNumbersServiceNode</span><span class="o">::</span><span class="n">AddTwoNumbersServiceNode</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="o">&amp;</span><span class="n">name</span><span class="p">)</span>
+<span class="w">        </span><span class="o">:</span><span class="w"> </span><span class="n">Node</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+<span class="w">        </span><span class="p">,</span><span class="w"> </span><span class="n">_server</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;add_two_numbers&quot;</span><span class="p">)</span>
+<span class="p">{</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="client">
+<span id="id4"></span><h2>Client<a class="headerlink" href="#client" title="Link to this heading">¶</a></h2>
+<p>Client is an abstract class, it’s porpuse is to be derived to adapt to it’s porpuse.
+A request can be sent to a service like in <a class="reference external" href="https://github.com/ROSA-develepment/RobotX/tree/main/src/examples/src/addtwonumbersclient">example3</a> for a simple Client, the request is sent to <em>add_two_numbers</em> service:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">SomeService</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">interfaces</span><span class="o">::</span><span class="n">srv</span><span class="o">::</span><span class="n">SomeService</span><span class="p">;</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">AddTwoNumbersClient</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Client</span><span class="o">&lt;</span><span class="n">SomeService</span><span class="o">&gt;</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">        </span><span class="n">AddTwoNumbersClient</span><span class="p">(</span><span class="n">Node</span><span class="o">*</span><span class="w"> </span><span class="n">parent</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="n">serviceName</span><span class="p">);</span>
+
+<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="nf">setRequest</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">first</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">second</span><span class="p">);</span>
+
+<span class="k">private</span><span class="o">:</span>
+<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="n">sendRequest</span><span class="p">()</span><span class="w"> </span><span class="k">override</span><span class="p">;</span>
+
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>.cpp</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">AddTwoNumbersClient</span><span class="o">::</span><span class="n">AddTwoNumbersClient</span><span class="p">(</span><span class="n">Node</span><span class="w"> </span><span class="o">*</span><span class="n">parent</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="o">&amp;</span><span class="n">serviceName</span><span class="p">)</span>
+<span class="w">        </span><span class="o">:</span><span class="w"> </span><span class="n">Client</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span><span class="w"> </span><span class="n">serviceName</span><span class="p">)</span>
+<span class="p">{</span>
+
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="n">AddTwoNumbersClient</span><span class="o">::</span><span class="n">setRequest</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">first</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">second</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">        </span><span class="n">_request</span><span class="o">-&gt;</span><span class="n">first</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">first</span><span class="p">;</span>
+<span class="w">        </span><span class="n">_request</span><span class="o">-&gt;</span><span class="n">second</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">second</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="n">AddTwoNumbersClient</span><span class="o">::</span><span class="n">sendRequest</span><span class="p">()</span>
+<span class="p">{</span>
+<span class="w">        </span><span class="n">waitForServer</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">seconds</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;Waiting for add_two_numbers server&quot;</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">try</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">                </span><span class="n">asyncSendRequest</span><span class="p">();</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">exception</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">                </span><span class="n">RCLCPP_ERROR</span><span class="p">(</span><span class="n">getLogger</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;Service call failed&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>After it can be instantiated on a node:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">SomeService</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="n">interfaces</span><span class="o">::</span><span class="n">srv</span><span class="o">::</span><span class="n">SomeService</span><span class="p">;</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">AddTwoNumbersClientNode</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Node</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+<span class="w">        </span><span class="n">AddTwoNumbersClientNode</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="n">name</span><span class="p">);</span>
+
+<span class="k">private</span><span class="o">:</span>
+<span class="w">        </span><span class="n">AddTwoNumbersClient</span><span class="w"> </span><span class="n">_client</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>It’s used like so:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">AddTwoNumbersClientNode</span><span class="o">::</span><span class="n">AddTwoNumbersClientNode</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="o">&amp;</span><span class="n">name</span><span class="p">)</span>
+<span class="w">        </span><span class="o">:</span><span class="w"> </span><span class="n">Node</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+<span class="w">        </span><span class="p">,</span><span class="w"> </span><span class="n">_client</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;add_two_numbers&quot;</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">        </span><span class="n">_client</span><span class="p">.</span><span class="n">setRequest</span><span class="p">(</span><span class="mi">21</span><span class="p">,</span><span class="w"> </span><span class="mi">21</span><span class="p">);</span>
+<span class="w">        </span><span class="n">_client</span><span class="p">.</span><span class="n">startWorkerThread</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 </section>
 </section>
 
