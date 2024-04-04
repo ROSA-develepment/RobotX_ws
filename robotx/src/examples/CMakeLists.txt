@@ -34,6 +34,7 @@ install(
                 add_two_numbers_client
                 add_two_numbers_server
                 count_until_action_service
+                count_until_action_client
         DESTINATION lib/${PROJECT_NAME}/
 )
 

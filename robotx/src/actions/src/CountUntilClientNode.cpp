@@ -20,7 +20,7 @@ public:
     void sendGoal(int targetNumber, double period)
     {
         // Wait for action server
-        _client->wait_for_action_server();
+        _client->wait_for_action_server(std::chrono::milliseconds(1000));
 
         auto options = rclcpp_action::Client<CountUntil>::SendGoalOptions();
         options.result_callback = std::bind(&CountUntilClientNode::goalResultCallback, this, _1);

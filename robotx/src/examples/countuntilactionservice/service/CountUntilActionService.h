@@ -2,9 +2,9 @@
 #ifndef __COUNTUNTILACTIONSERVICE_H__
 #define __COUNTUNTILACTIONSERVICE_H__
 
-#include "rosa/action/ActionServer.h"
-
 #include "interfaces/action/count_until.hpp"
+
+#include <rosa/actionservice/ActionService.h>
 
 
 using CountUntil = interfaces::action::CountUntil;
