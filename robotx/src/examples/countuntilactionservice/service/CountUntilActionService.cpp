@@ -42,17 +42,20 @@ void CountUntilActionService::handleAcceptedCallback(std::shared_ptr<CountUntilG
         goalHandle->get_goal()->target_number,
         goalHandle->get_goal()->period);
 
-    goalHandle->succeed(result);
+    goalHandle->abort(result);
 }
 
 int CountUntilActionService::countTo(long targetNumber, double period)
 {
+    auto feedback = std::make_shared<CountUntil::Feedback>();
+
     auto counter = 0;
     rclcpp::Rate loopRate(1.0 / period);
-
     while (counter < targetNumber)
     {
         RCLCPP_INFO(getLogger(), "%d", ++counter);
+        feedback->current_number = counter;
+        
         loopRate.sleep();
     }
 

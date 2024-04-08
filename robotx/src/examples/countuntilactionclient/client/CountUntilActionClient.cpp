@@ -28,5 +28,19 @@ void CountUntilActionClient::goalResponseCallback(CountUntilGoalHandle::SharedPt
 
 void CountUntilActionClient::goalResultCallback(CountUntilGoalHandle::WrappedResult const &result)
 {
+    auto status = result.code;
+
+    if (status == rclcpp_action::ResultCode::SUCCEEDED)
+    {
+        RCLCPP_INFO(getLogger(), "Succeeded");
+    }
+    else
+    {
+       if (status == rclcpp_action::ResultCode::ABORTED)
+       {
+           RCLCPP_ERROR(getLogger(), "Aborted");
+       }
+    }
+
     RCLCPP_INFO(getLogger(), "Result: %ld", result.result->reached_number);
 }
