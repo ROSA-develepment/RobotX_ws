@@ -19,7 +19,8 @@ public:
     void setGoal(int targetNumber, double period);
 
 private:
-    void goalResultCallback(CountUntilGoalHandle::WrappedResult const& result);
+    void goalResponseCallback(CountUntilGoalHandle::SharedPtr const& response) override;
+    void goalResultCallback(CountUntilGoalHandle::WrappedResult const& result) override;
 };
 
 

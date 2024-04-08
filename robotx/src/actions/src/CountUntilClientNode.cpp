@@ -22,8 +22,12 @@ public:
         // Wait for action server
         _client->wait_for_action_server(std::chrono::milliseconds(1000));
 
+        // Add callbacks
         auto options = rclcpp_action::Client<CountUntil>::SendGoalOptions();
-        options.result_callback = std::bind(&CountUntilClientNode::goalResultCallback, this, _1);
+        options.result_callback = std::bind(
+            &CountUntilClientNode::goalResultCallback, this, _1);
+        options.goal_response_callback = std::bind(
+            &CountUntilClientNode::goalResponseCallback, this, _1);
 
         // Create goal
         auto goal = CountUntil::Goal();
@@ -34,6 +38,19 @@ public:
     }
 
 private:
+
+    // Callback to know if the goal was accepted or rejected
+    void goalResponseCallback(CountUntilGoalHandle::SharedPtr const& goalHandle)
+    {
+        if (!goalHandle)
+        {
+            RCLCPP_INFO(get_logger(), "Goal got rejected");
+        }
+        else
+        {
+            RCLCPP_INFO(get_logger(), "Goal got accepted");
+        }
+    }
 
     // Callback to receive the result once the goal is done
     void goalResultCallback(CountUntilGoalHandle::WrappedResult const& result)

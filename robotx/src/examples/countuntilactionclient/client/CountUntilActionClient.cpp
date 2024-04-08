@@ -10,9 +10,20 @@ CountUntilActionClient::CountUntilActionClient(Node *parent, std::string const &
 
 void CountUntilActionClient::setGoal(int targetNumber, double period)
 {
-    _options.result_callback = [this](auto const& result) { goalResultCallback(result); };
     _goal.target_number = targetNumber;
     _goal.period = period;
+}
+
+void CountUntilActionClient::goalResponseCallback(CountUntilGoalHandle::SharedPtr const& response)
+{
+    if (!response)
+    {
+        RCLCPP_INFO(getLogger(), "Goal got rejected");
+    }
+    else
+    {
+        RCLCPP_INFO(getLogger(), "Goal got accepted");
+    }
 }
 
 void CountUntilActionClient::goalResultCallback(CountUntilGoalHandle::WrappedResult const &result)

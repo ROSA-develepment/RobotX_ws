@@ -29,7 +29,21 @@ private:
 
     rclcpp_action::GoalResponse goalCallback(rclcpp_action::GoalUUID const& uuig, std::shared_ptr<interfaces::action::CountUntil::Goal const> const& goal)
     {
-        return rclcpp_action::GoalResponse::ACCEPT_AND_EXECUTE;
+        RCLCPP_INFO(get_logger(), "Received a goal");
+
+        rclcpp_action::GoalResponse response;
+        if (goal->target_number <= 0)
+        {
+            RCLCPP_INFO(get_logger(), "Rejecting goal");
+            response = rclcpp_action::GoalResponse::REJECT;
+        }
+        else
+        {
+            RCLCPP_INFO(get_logger(), "Accepting goal");
+            response = rclcpp_action::GoalResponse::ACCEPT_AND_EXECUTE;
+        }
+
+        return response;
     }
 
     rclcpp_action::CancelResponse cancelCallback(std::shared_ptr<CountUntilGoalHandle> const goalHandle)
