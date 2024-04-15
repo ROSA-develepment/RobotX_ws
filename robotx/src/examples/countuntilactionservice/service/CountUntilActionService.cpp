@@ -38,26 +38,16 @@ void CountUntilActionService::handleAcceptedCallback(std::shared_ptr<CountUntilG
 {
     auto result = std::make_shared<CountUntil::Result>();
 
-    result->reached_number = countTo(
-        goalHandle->get_goal()->target_number,
-        goalHandle->get_goal()->period);
-
-    goalHandle->abort(result);
-}
-
-int CountUntilActionService::countTo(long targetNumber, double period)
-{
-    auto feedback = std::make_shared<CountUntil::Feedback>();
-
     auto counter = 0;
-    rclcpp::Rate loopRate(1.0 / period);
-    while (counter < targetNumber)
+    auto feedback = std::make_shared<CountUntil::Feedback>();
+    rclcpp::Rate loopRate(1.0 / goalHandle->get_goal()->period);
+    while (counter < goalHandle->get_goal()->target_number)
     {
         RCLCPP_INFO(getLogger(), "%d", ++counter);
         feedback->current_number = counter;
-        
+        goalHandle->publish_feedback(feedback);
         loopRate.sleep();
     }
 
-    return counter;
+    goalHandle->succeed(result);
 }

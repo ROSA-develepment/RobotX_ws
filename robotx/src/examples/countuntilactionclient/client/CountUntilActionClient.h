@@ -21,6 +21,7 @@ public:
 private:
     void goalResponseCallback(CountUntilGoalHandle::SharedPtr const& response) override;
     void goalResultCallback(CountUntilGoalHandle::WrappedResult const& result) override;
+    void defineFeedbackCallback();
 };
 
 

@@ -24,8 +24,6 @@ private:
 
     void handleAcceptedCallback(
         std::shared_ptr<CountUntilGoalHandle> const& goalHandle) override;
-
-    int countTo(long targetNumber, double period);
 };
 
 
