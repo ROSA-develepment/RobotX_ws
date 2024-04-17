@@ -6,6 +6,13 @@ CountUntilActionClient::CountUntilActionClient(Node *parent, std::string const &
     : ActionClient(parent, service)
 {
     defineFeedbackCallback();
+    _timer.createWallTimer(getParent(), std::chrono::seconds(2),
+        [this]()
+        {
+            RCLCPP_INFO(getLogger(), "stop the goal");
+            asyncCancelGoal(_goalHandle);
+            //_timer.cancel();
+        });
 }
 
 void CountUntilActionClient::setGoal(int targetNumber, double period)
@@ -22,6 +29,7 @@ void CountUntilActionClient::goalResponseCallback(CountUntilGoalHandle::SharedPt
     }
     else
     {
+        _goalHandle = response;
         RCLCPP_INFO(getLogger(), "Goal got accepted");
     }
 }
@@ -39,6 +47,14 @@ void CountUntilActionClient::goalResultCallback(CountUntilGoalHandle::WrappedRes
        if (status == rclcpp_action::ResultCode::ABORTED)
        {
            RCLCPP_ERROR(getLogger(), "Aborted");
+       }
+       else
+       {
+           if (status == rclcpp_action::ResultCode::CANCELED)
+           {
+               RCLCPP_WARN(getLogger(), "Canceled");
+
+           }
        }
     }
 

@@ -6,6 +6,7 @@
 
 #include <rosa/actionclient/ActionClient.h>
 #include <rosa/node/Node.h>
+#include <rosa/timer/Timer.h>
 
 
 using CountUntil = interfaces::action::CountUntil;
@@ -22,6 +23,8 @@ private:
     void goalResponseCallback(CountUntilGoalHandle::SharedPtr const& response) override;
     void goalResultCallback(CountUntilGoalHandle::WrappedResult const& result) override;
     void defineFeedbackCallback();
+
+    Timer _timer;
 };
 
 

@@ -31,6 +31,7 @@ rclcpp_action::GoalResponse CountUntilActionService::goalCallback(rclcpp_action:
 rclcpp_action::CancelResponse CountUntilActionService::cancelCallback(
     std::shared_ptr<CountUntilGoalHandle> const& goalHandle)
 {
+    RCLCPP_INFO(getLogger(), "Received stop request");
     return rclcpp_action::CancelResponse::ACCEPT;
 }
 
@@ -43,6 +44,12 @@ void CountUntilActionService::handleAcceptedCallback(std::shared_ptr<CountUntilG
     rclcpp::Rate loopRate(1.0 / goalHandle->get_goal()->period);
     while (counter < goalHandle->get_goal()->target_number)
     {
+        if (goalHandle->is_canceling())
+        {
+            result->reached_number = counter;
+            goalHandle->canceled(result);
+            break;
+        }
         RCLCPP_INFO(getLogger(), "%d", ++counter);
         feedback->current_number = counter;
         goalHandle->publish_feedback(feedback);

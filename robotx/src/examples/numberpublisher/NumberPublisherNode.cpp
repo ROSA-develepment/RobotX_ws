@@ -11,7 +11,7 @@ NumberPublisherNode::NumberPublisherNode(std::string const &name)
 
     _timer.createWallTimer(this,
         std::chrono::milliseconds(_publishFrequency),
-        &NumberPublisherNode::numberPublisher);
+        [this]() { numberPublisher(); });
 
     RCLCPP_INFO(getLogger(), "Number publisher node is running");
 }
