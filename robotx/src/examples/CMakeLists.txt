@@ -7,6 +7,7 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
+find_package(rclcpp REQUIRED)
 find_package(interfaces REQUIRED)
 find_package(rosa REQUIRED)
 
@@ -22,11 +23,19 @@ ament_target_dependencies(add_two_numbers_client interfaces rosa)
 add_executable(add_two_numbers_server addtwonumbersservice/AddTwoNumbersServiceNode.cpp addtwonumbersservice/service/AddTwoNumbersService.cpp)
 ament_target_dependencies(add_two_numbers_server interfaces rosa)
 
+add_executable(count_until_action_service countuntilactionservice/CountUntilActionServerNode.cpp countuntilactionservice/service/CountUntilActionService.cpp)
+ament_target_dependencies(count_until_action_service interfaces rosa)
+
+add_executable(count_until_action_client countuntilactionclient/CountUntilActionClientNode.cpp countuntilactionclient/client/CountUntilActionClient.cpp)
+ament_target_dependencies(count_until_action_client interfaces rosa)
+
 install(
         TARGETS number_publisher
                 number_subscriber
                 add_two_numbers_client
                 add_two_numbers_server
+                count_until_action_service
+                count_until_action_client
         DESTINATION lib/${PROJECT_NAME}/
 )
 
