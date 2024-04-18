@@ -6,13 +6,13 @@ CountUntilActionClient::CountUntilActionClient(Node *parent, std::string const &
     : ActionClient(parent, service)
 {
     defineFeedbackCallback();
-    _timer.createWallTimer(getParent(), std::chrono::seconds(2),
-        [this]()
-        {
-            RCLCPP_INFO(getLogger(), "stop the goal");
-            asyncCancelGoal(_goalHandle);
-            //_timer.cancel();
-        });
+    //_timer.createWallTimer(getParent(), std::chrono::seconds(2),
+    //    [this]()
+    //    {
+    //        RCLCPP_INFO(getLogger(), "stop the goal");
+    //        asyncCancelGoal(_goalHandle);
+    //        _timer.stop();
+    //    });
 }
 
 void CountUntilActionClient::setGoal(int targetNumber, double period)
@@ -67,8 +67,8 @@ void CountUntilActionClient::defineFeedbackCallback()
         std::shared_ptr<CountUntil::Feedback const> const& message)
     {
         goalHandle.get()->get_goal_stamp().seconds();
-        RCLCPP_INFO(getLogger(), "Feedback %li, timestamp = %f", message->current_number
-            , goalHandle.get()->get_goal_stamp().seconds());
+        RCLCPP_INFO(getLogger(), "Feedback %li, timestamp = %f", message->current_number,
+            goalHandle.get()->get_goal_stamp().seconds());
     };
 
     setFeedbackCallback<CountUntil::Feedback>(feedback);

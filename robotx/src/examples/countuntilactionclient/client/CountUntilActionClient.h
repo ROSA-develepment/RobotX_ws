@@ -2,7 +2,7 @@
 #ifndef __COUNTUNTILCLIENT_H__
 #define __COUNTUNTILCLIENT_H__
 
-#include "interfaces/action/count_until.hpp"
+#include <interfaces/action/count_until.hpp>
 
 #include <rosa/actionclient/ActionClient.h>
 #include <rosa/node/Node.h>
@@ -24,7 +24,7 @@ private:
     void goalResultCallback(CountUntilGoalHandle::WrappedResult const& result) override;
     void defineFeedbackCallback();
 
-    Timer _timer;
+    //Timer _timer;
 };
 
 

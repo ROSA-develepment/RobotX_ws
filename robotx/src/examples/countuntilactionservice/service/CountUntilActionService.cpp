@@ -11,6 +11,7 @@ CountUntilActionService::CountUntilActionService(Node *parent, std::string const
 rclcpp_action::GoalResponse CountUntilActionService::goalCallback(rclcpp_action::GoalUUID const& uuig,
     std::shared_ptr<interfaces::action::CountUntil::Goal const> const& goal)
 {
+    (void)uuig;
     RCLCPP_INFO(getLogger(), "Received a goal");
 
     rclcpp_action::GoalResponse response;
@@ -31,7 +32,8 @@ rclcpp_action::GoalResponse CountUntilActionService::goalCallback(rclcpp_action:
 rclcpp_action::CancelResponse CountUntilActionService::cancelCallback(
     std::shared_ptr<CountUntilGoalHandle> const& goalHandle)
 {
-    RCLCPP_INFO(getLogger(), "Received stop request");
+    (void)goalHandle;
+    RCLCPP_INFO(getLogger(), "Received cancel request");
     return rclcpp_action::CancelResponse::ACCEPT;
 }
 

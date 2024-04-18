@@ -18,6 +18,7 @@ rosidl_generate_interfaces(${PROJECT_NAME}
 ament_export_dependencies(rosidl_default_runtime)
 
 install(DIRECTORY
+        ${CMAKE_CURRENT_SOURCE_DIR}/action
         ${CMAKE_CURRENT_SOURCE_DIR}/msg
         ${CMAKE_CURRENT_SOURCE_DIR}/srv
         DESTINATION share/${PROJECT_NAME}/
